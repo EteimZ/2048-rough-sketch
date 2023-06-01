@@ -1,6 +1,3 @@
-"""
-My rough implementation 2048
-"""
 import random
 
 def drawGrid(grid):
@@ -27,6 +24,12 @@ def transpose_grid(grid):
      [2, 0, 16, 32], 
      [0, 0, 0,   2], 
      [0, 0, 0,  0 ]]
+
+    Usage:
+
+    >>> grid = [[4,  2,  0, 0], [16, 0,  0, 0], [2,  16, 0, 0], [16, 32, 2, 0]]
+    >>> transpose_grid(grid)
+    [[4, 16, 2, 16], [2, 0, 16, 32], [0, 0, 0, 2], [0, 0, 0, 0]]
     """
 
     transposed_grid = list(map(list, zip(*grid)))
@@ -43,6 +46,13 @@ def initial_random(grid):
 
     Two cells get randomly initialized with the value of 2 or 4.
     There's a 90% chance of getting 2.
+
+    Usage:
+
+    >>> grid = [[0, 0, 0, 0],[0, 0, 0, 0],[0, 0, 0, 0], [0, 0, 0, 0]]
+    >>> random.seed(2048)
+    >>> initial_random(grid)
+    [[0, 0, 0, 0], [0, 0, 0, 2], [0, 2, 0, 0], [0, 0, 0, 0]]
     '''
     positions = random.sample(range(16), 2)  # Generate 2 unique positions
     
@@ -64,6 +74,11 @@ def move_trailing_zeros_to_the_right(lst):
     output:
 
     [0, 0, 4, 4]
+
+    Usage:
+
+    >>> move_trailing_zeros_to_the_right([4, 0, 4, 0])
+    [0, 0, 4, 4]
     """
 
     num_zeros = lst.count(0)  # Count the number of zeros in the list
@@ -80,6 +95,11 @@ def move_trailing_zeros_to_the_left(lst):
 
     output:
 
+    [2, 2, 0, 0]
+
+    Usage:
+
+    >>> move_trailing_zeros_to_the_left([2, 0, 2, 0])
     [2, 2, 0, 0]
     """
 
@@ -105,6 +125,10 @@ def move_right(grid):
      [0, 0, 0, 8], 
      [0, 0, 0, 16]]
 
+    Usage:
+
+    >>> move_right([[0, 0, 0, 0], [4, 4, 0, 0], [8, 0, 0, 0], [8, 8, 0, 0]])
+    [[0, 0, 0, 0], [0, 0, 0, 8], [0, 0, 0, 8], [0, 0, 0, 16]]
     """
 
     for i in range(4):
@@ -137,6 +161,11 @@ def move_left(grid):
      [0, 0, 0, 0], 
      [4, 0, 0, 0]]
 
+    Usage:
+
+    >>> move_left([[4, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [2, 2, 0, 0]])
+    [[4, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [4, 0, 0, 0]]
+
     """
 
     for i in range(4):
@@ -156,6 +185,36 @@ def move_left(grid):
 def check_loss(grid):
     """
     Check if the player has lost the game
+
+    Args:
+        grid (list): The game grid.
+
+    Returns:
+        bool: True if the player has lost, False otherwise.
+
+    >>> grid = [[4, 2, 0, 0], [16, 0, 0, 0], [2, 16, 0, 0], [16, 32, 2, 0]]
+    >>> check_loss(grid)
+    False
+
+    >>> grid = [[4, 2, 4, 8], [16, 32, 64, 128], [2, 4, 8, 16], [64, 32, 16, 8]]
+    >>> check_loss(grid)
+    True
+
+    >>> grid = [[2, 4, 8, 16], [4, 8, 16, 32], [8, 16, 32, 64], [16, 32, 64, 128]]
+    >>> check_loss(grid)
+    True
+
+    >>> grid = [[2, 4, 8, 16], [4, 8, 16, 32], [8, 16, 32, 64], [16, 32, 2, 128]]
+    >>> check_loss(grid)
+    True
+
+    >>> grid = [[2, 4, 8, 16], [4, 8, 16, 32], [8, 16, 32, 64], [16, 2, 2, 128]]
+    >>> check_loss(grid)
+    False
+
+    >>> grid = [[4, 4, 16, 32], [8, 16, 32, 64], [16, 32, 64, 128], [32, 64, 128, 256]]
+    >>> check_loss(grid)
+    False
     """
     
     for i in range(4):
@@ -178,64 +237,37 @@ def check_loss(grid):
 def check_2048(grid):
     """
     Check if the player has gotten 2048
+
+    Args:
+        grid (list): The game grid.
+
+    Returns:
+        bool: True if the player has gotten 2048 and None if they haven't
+    
+    >>> grid = [[2, 4, 8, 16], [4, 8, 16, 32], [8, 16, 32, 64], [16, 32, 64, 128]]
+    >>> check_2048(grid)
+    False
+
+    >>> grid = [[2, 4, 8, 16], [4, 8, 16, 32], [8, 16, 32, 64], [16, 32, 64, 2048]]
+    >>> check_2048(grid)
+    True
+
+    >>> grid = [[1024, 2, 4, 8], [4, 8, 16, 32], [8, 16, 32, 64], [16, 32, 64, 128]]
+    >>> check_2048(grid)
+    False
+
+    >>> grid = [[1024, 2, 4, 8], [4, 8, 16, 32], [8, 16, 32, 64], [16, 32, 64, 2048]]
+    >>> check_2048(grid)
+    True
     """
 
     for i in range(4):
         for j in range(4):
             if grid[i][j] == 2048:
                 return True
-
-def main():
-
-    # Create a grid for the game
-    grid = [[0, 0, 0, 0] for _ in range(4)]
-
-    # Randomly initialize the grid
-    initial_random(grid)
-
-    # Game loop
-    while True:
-        drawGrid(grid)
-
-        inp = input("Please press key(w⬆️|s⬇️|a⬅️|d➡️|e to exit): ")
-        if inp == 'w':
-            # transpose the grid
-            t_grid = transpose_grid(grid)
-            # retranspose the grid after moving left
-            grid = transpose_grid(move_left(t_grid))
-        elif inp == 's':
-            # transpose the grid
-            t_grid = transpose_grid(grid)
-            # retranspose the grid after moving right
-            grid = transpose_grid(move_right(t_grid))
-        elif inp == 'a':
-            grid = move_left(grid)
-        elif inp == 'd':
-            grid = move_right(grid)
-        elif inp == 'e':
-            exit()
-        else:
-            print("Unknown key has been pressed!")
-
-        if check_2048(grid):
-            print("Congrats you got 2048")
     
-        if check_loss(grid):
-            print("Game over!")
-            break
-        
-        # Ensure only empty get assigned new values
-        empty_positions = [(i, j) for i in range(4) for j in range(4) if grid[i][j] == 0]
+    return False
 
-        if not empty_positions:
-            continue  # No empty positions, exit the function
-
-        i, j = random.choice(empty_positions)
-        grid[i][j] = random.choice([2, 4])
-
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        print()
-        exit()
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

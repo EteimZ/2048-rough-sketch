@@ -1,13 +1,26 @@
-# 2048
+# 2048 Rough Sketch
 
 A rough implementation of [2048](https://play2048.co/) in python.
+
+## Folder structure
+
+```bash
+src
+├── main.py
+└── utils.py
+```
+
+The `src` folder contains two files:
+
+- `main.py`: This is the main entry file to start the game.
+- `utils.py`: This contains functions used in the game of 2028.
 
 ## Usage 
 
 ```bash
 git clone https://github.com/EteimZ/2048-rough-sketch
 cd 2048-rough-sketch
-python main.py
+python src/main.py
    0|   0|   0|   4
    0|   0|   0|   0
    2|   0|   0|   0
@@ -56,4 +69,13 @@ Please press key(w⬆|s⬇|a⬅|d➡|e to exit): a
    0|   0|   2|   0                                                                                                               
    0|   0|   8|   4                                                                                                           
 Please press key(w⬆|s⬇|a⬅|d➡|e to exit): d
+```
+
+## Test
+
+Tests have been implemented using [doctest](https://docs.python.org/3/library/doctest.html). Use the command below to run them.
+
+```bash
+python src/utils.py # Non verbose test
+python src/utils.py -v # verbose test
 ```
