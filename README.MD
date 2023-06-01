@@ -35,7 +35,7 @@ Please press key(w⬆|s⬇|a⬅|d➡|e to exit): w
    0|   0|   0|   0
    0|   0|   0|   0
    2|   0|   2|   4                                                                                                             
-Please press key(w⬆|s⬇|a⬅|d➡|e to exit):  
+Please press key(w⬆|s⬇|a⬅|d➡|e to exit): s
 ```
 
 `a` moves the grid left.
@@ -45,7 +45,7 @@ Please press key(w⬆|s⬇|a⬅|d➡|e to exit):
    0|   0|   0|   0                                                                                                               
    0|   0|   0|   0                                                                                                               
    8|   0|   4|   0                                                                                                           
-Please press key(w⬆|s⬇|a⬅|d➡|e to exit):  
+Please press key(w⬆|s⬇|a⬅|d➡|e to exit): a
 ```
 
 `d` moves the grid right.
@@ -55,5 +55,5 @@ Please press key(w⬆|s⬇|a⬅|d➡|e to exit):
    0|   0|   0|   0                                                                                                               
    0|   0|   2|   0                                                                                                               
    0|   0|   8|   4                                                                                                           
-Please press key(w⬆|s⬇|a⬅|d➡|e to exit):  
+Please press key(w⬆|s⬇|a⬅|d➡|e to exit): d
 ```
